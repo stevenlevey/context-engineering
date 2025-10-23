@@ -1,0 +1,264 @@
+company_name: TechCorp
+current_quarter: Q3 2025
+hiring_constraint: a hiring freeze until Q4 2025
+budget_allocation: a $2.3M budget allocation for Q3-Q4 development
+critical_deadlines:
+  - description: Customer Portal v2.0 must launch before competitor's product announcement
+    date: estimated August 20th
+  - description: New GDPR requirements must be implemented
+    date: September 1st
+technical_debt_allocation: "15%"
+performance_summary: velocity fluctuations and some team satisfaction concerns
+team_types: frontend, backend, and devops
+team_structure:
+  teams:
+    frontend:
+      lead: Sarah Chen
+      members:
+        - name: Mike Rodriguez
+          seniority: senior
+          availability: 0.8
+          skills:
+            - React
+            - TypeScript
+            - CSS
+        - name: Emma Wilson
+          seniority: mid
+          availability: 1.0
+          skills:
+            - Vue.js
+            - JavaScript
+            - UX
+        - name: Alex Kumar
+          seniority: junior
+          availability: 1.0
+          skills:
+            - HTML
+            - CSS
+            - JavaScript
+    backend:
+      lead: David Park
+      members:
+        - name: Lisa Thompson
+          seniority: senior
+          availability: 0.6
+          skills:
+            - Python
+            - Django
+            - PostgreSQL
+        - name: James Miller
+          seniority: mid
+          availability: 1.0
+          skills:
+            - Node.js
+            - Express
+            - MongoDB
+        - name: Rachel Green
+          seniority: senior
+          availability: 0.9
+          skills:
+            - Java
+            - Spring
+            - MySQL
+    devops:
+      lead: Tom Anderson
+      members:
+        - name: Kevin Zhang
+          seniority: senior
+          availability: 0.7
+          skills:
+            - Docker
+            - Kubernetes
+            - AWS
+        - name: Maria Santos
+          seniority: mid
+          availability: 1.0
+          skills:
+            - CI/CD
+            - Jenkins
+            - Azure
+sprint_id: SPRINT-2025-07
+sprint_name: Q3 Feature Development Sprint
+sprint_start_date: "2025-07-01"
+sprint_end_date: "2025-07-14"
+sprint_status: active
+sprint_tickets:
+  - key: PROJ-1234
+    summary: Implement user authentication microservice
+    description: Create OAuth2-based authentication service with JWT tokens, rate limiting, and audit logging
+    priority: High
+    status: In Progress
+    assignee: Lisa Thompson
+    reporter: David Park
+    story_points: 13
+    time_spent: 18h
+    time_remaining: 22h
+    labels:
+      - backend
+      - security
+      - microservice
+    components:
+      - Authentication
+      - API Gateway
+    created: "2025-06-28T09:00:00Z"
+    updated: "2025-07-07T14:30:00Z"
+  - key: PROJ-1235
+    summary: Redesign dashboard UI components
+    description: Update dashboard with new design system, implement responsive layout, and add dark mode support
+    priority: Medium
+    status: To Do
+    assignee: Emma Wilson
+    reporter: Sarah Chen
+    story_points: 8
+    time_spent: 0h
+    time_remaining: 32h
+    labels:
+      - frontend
+      - ui
+      - design-system
+    components:
+      - Dashboard
+      - UI Components
+    created: "2025-06-29T11:15:00Z"
+    updated: "2025-07-05T16:45:00Z"
+  - key: PROJ-1236
+    summary: Set up production monitoring and alerting
+    description: Configure Prometheus, Grafana, and PagerDuty integration for comprehensive system monitoring
+    priority: High
+    status: Blocked
+    assignee: Kevin Zhang
+    reporter: Tom Anderson
+    story_points: 5
+    time_spent: 8h
+    time_remaining: 12h
+    labels:
+      - devops
+      - monitoring
+      - infrastructure
+    components:
+      - Monitoring
+      - Infrastructure
+    created: "2025-06-30T08:30:00Z"
+    updated: "2025-07-06T10:20:00Z"
+    blocked_reason: Waiting for AWS permissions approval
+  - key: PROJ-1237
+    summary: Optimize database queries for user analytics
+    description: Identify and resolve slow queries in analytics module, implement proper indexing strategy
+    priority: Medium
+    status: Code Review
+    assignee: Rachel Green
+    reporter: David Park
+    story_points: 3
+    time_spent: 12h
+    time_remaining: 4h
+    labels:
+      - backend
+      - performance
+      - database
+    components:
+      - Analytics
+      - Database
+    created: "2025-07-01T13:00:00Z"
+    updated: "2025-07-07T09:15:00Z"
+project_allocations:
+  - project: Customer Portal v2.0
+    deadline: "2025-08-15"
+    priority: P0
+    resources:
+      frontend: 2.5
+      backend: 1.8
+      devops: 0.7
+    budget_used: 0.65
+    risk_level: medium
+  - project: Internal Analytics Platform
+    deadline: "2025-09-30"
+    priority: P1
+    resources:
+      frontend: 1.0
+      backend: 1.9
+      devops: 1.0
+    budget_used: 0.45
+    risk_level: low
+  - project: Mobile App MVP
+    deadline: "2025-10-15"
+    priority: P2
+    resources:
+      frontend: 1.8
+      backend: 0.6
+      devops: 0.3
+    budget_used: 0.25
+    risk_level: high
+velocity_trend:
+  - name: April
+    story_points: 89
+    goals_met: 0.85
+  - name: May
+    story_points: 76
+    goals_met: 0.7
+  - name: June
+    story_points: 92
+    goals_met: 0.9
+bug_escape_rate: 0.12
+average_lead_time: 8.5 days
+deployment_frequency: 2.3 per week
+team_satisfaction_score: 7.2
+business_constraints:
+  - type: Budget
+    description: $2.3M allocated for Q3-Q4 development
+  - type: Hiring freeze
+    description: No new hires until Q4 2025
+  - type: Key deadline
+    description: Customer Portal v2.0 must launch before competitor's product announcement (estimated August 20th)
+  - type: Technical debt
+    description: 15% of capacity should be allocated to technical debt reduction
+  - type: Compliance
+    description: New GDPR requirements must be implemented by September 1st
+stakeholder_feedback:
+  - message: The authentication system delays are causing downstream impacts on the customer portal timeline. We need to understand if we can reallocate resources or if we need to adjust scope.
+    author: Jane Smith
+    title: Product Owner
+  - message: The mobile app project seems to be falling behind. Given the high risk level, should we consider bringing in external contractors?
+    author: Robert Johnson
+    title: Engineering Director
+  - message: Our monitoring gaps are a significant concern. The blocked DevOps ticket needs immediate attention.
+    author: Patricia Lee
+    title: CTO
+role_title: senior project manager and resource planning specialist
+manager_name: Steven
+manager_title: Product Manager
+manager_responsibilities: overseeing multiple software projects
+expertise_areas: analyzing project status, resource optimization, risk assessment, and timeline management
+knowledge_areas: agile methodologies, team dynamics, and strategic business planning
+analysis_sections:
+  - title: Immediate Action Items
+    description: Identify the top 3 actions that need to be taken this week to address the most critical issues
+  - title: Resource Reallocation Recommendations
+    description: Propose how to redistribute team members across projects to optimize delivery timelines while maintaining quality
+  - title: Risk Mitigation Strategy
+    description: Develop specific steps to address the high-risk Mobile App MVP project and the blocked monitoring ticket
+  - title: Timeline Adjustments
+    description: Recommend realistic timeline adjustments for each project based on current velocity trends and constraints
+  - title: Communication Plan
+    description: Define key messages for stakeholders and present trade-offs involved in your recommendations
+response_format_instructions: Structure your response with clear headings for each of the 5 required sections. Use bullet points for action items and recommendations. Include specific timelines where applicable. Present resource allocation recommendations in a clear, tabular format when possible. Provide reasoning for each major recommendation. Keep the response comprehensive but concise, focusing on actionable insights rather than restating the provided data.
+communication_tone_guidelines: Communicate with the authority and expertise of a senior project manager. Use professional, analytical language appropriate for executive-level stakeholders. Be direct about challenges and realistic about constraints while maintaining a solutions-focused approach. Balance optimism with pragmatic assessment of risks and trade-offs.
+response_examples:
+  - title: Example Resource Reallocation
+    content: |-
+      - Move Mike Rodriguez (0.8 availability, React/TypeScript) from Mobile App to Customer Portal frontend to accelerate critical deadline
+      - Reassign Maria Santos (full availability, CI/CD expertise) to unblock monitoring ticket by coordinating AWS permissions
+  - title: Example Risk Mitigation
+    content: |-
+      - For blocked DevOps ticket: "Escalate AWS permissions request to Patricia Lee (CTO) for executive intervention, establish daily check-ins with Tom Anderson until resolved"
+      - For high-risk Mobile App: "Recommend scope reduction to core MVP features, consider external contractor for specialized mobile development skills"
+  - title: Example Communication Message
+    content: '"Based on current velocity trends and resource constraints, we recommend prioritizing Customer Portal v2.0 delivery while accepting a 3-week delay on Mobile App MVP to ensure quality and meet the critical August 15th deadline."'
+completion_requirements:
+  - Address all 5 required sections with specific, actionable recommendations
+  - Base recommendations on the provided data (team structure, current sprint, performance metrics)
+  - Include clear reasoning for major decisions
+  - Respect the constraints (hiring freeze, budget limits, technical debt allocation)
+  - Provide realistic timelines that account for current team velocity
+  - Consider stakeholder concerns and business priorities
+  - Be implementable within the current organizational structure and capabilities
+  - Include specific names and assignments where appropriate based on team member skills and availability
