@@ -21,7 +21,7 @@ echo "✅ Testing core functionality..."
 
 # Test 1: Basic generation
 echo "📄 Test 1: Generate context from template and data file"
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json -o output/test_output.md
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json -o output/test_output.md
 if [ $? -eq 0 ]; then
     echo "✅ Generated output/test_output.md successfully"
 else
@@ -32,7 +32,7 @@ fi
 # Test 2: Validation only
 echo ""
 echo "🔍 Test 2: Validate template and data"
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json --validate-only
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json --validate-only
 if [ $? -eq 0 ]; then
     echo "✅ Template and data validation passed"
 else
@@ -43,7 +43,7 @@ fi
 # Test 3: Pipe data
 echo ""
 echo "🔄 Test 3: Pipe data from stdin"
-cat prompt/sample_data.json | uv run python src/context_generator.py -t prompt/prompt_template.md > /dev/null
+cat data/sample_data.json | uv run python src/context_generator.py -t prompt/prompt_template.md > /dev/null
 if [ $? -eq 0 ]; then
     echo "✅ Stdin piping works correctly"
 else
@@ -54,7 +54,7 @@ fi
 # Test 4: Output to stdout
 echo ""
 echo "📤 Test 4: Output to stdout (showing first 10 lines)"
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | head -10
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | head -10
 if [ $? -eq 0 ]; then
     echo "✅ Stdout output works correctly"
 else
@@ -70,16 +70,16 @@ echo "📖 Usage Examples"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "  # Generate and view context"
-echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json"
+echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json"
 echo ""
 echo "  # Save to output directory"
-echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json -o output/result.md"
+echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json -o output/result.md"
 echo ""
 echo "  # Pipe data from stdin"
-echo "  cat prompt/sample_data.json | uv run python src/context_generator.py -t prompt/prompt_template.md"
+echo "  cat data/sample_data.json | uv run python src/context_generator.py -t prompt/prompt_template.md"
 echo ""
 echo "  # Validate without generating"
-echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json --validate-only"
+echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json --validate-only"
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "🔌 Pipe to AI Tools"
@@ -88,16 +88,16 @@ echo ""
 echo "The generated context can be piped to any AI tool or system:"
 echo ""
 echo "  # Copy to clipboard (macOS)"
-echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | pbcopy"
+echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | pbcopy"
 echo ""
 echo "  # Pipe to Gemini CLI"
-echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | gemini -p 'What should I prioritize?'"
+echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | gemini -p 'What should I prioritize?'"
 echo ""
 echo "  # Pipe to any custom tool"
-echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | your-ai-tool"
+echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | your-ai-tool"
 echo ""
 echo "  # Save and use with Claude, ChatGPT, or other AI systems"
-echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json -o prompt.txt"
+echo "  uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json -o prompt.txt"
 echo ""
 
 # Show preview of generated output

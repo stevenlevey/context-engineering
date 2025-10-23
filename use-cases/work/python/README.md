@@ -16,9 +16,12 @@ use-cases/work/python/
 ├── src/                   # Core application
 │   └── context_generator.py
 │
-├── prompt/                # Prompt templates and sample data
-│   ├── prompt_template.md     # Sample Jinja2 template
-│   └── sample_data.json       # Sample JSON data
+├── prompt/                # Prompt templates
+│   └── prompt_template.md     # Sample Jinja2 template
+│
+├── data/                  # Sample data files
+│   ├── sample_data.json       # Sample JSON data
+│   └── data.yaml              # Sample YAML data
 │
 ├── scripts/               # Demo and test scripts
 │   └── demo.sh                # Comprehensive demo script
@@ -63,13 +66,13 @@ uv sync
 
 ```bash
 # Generate and view output
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json
 
 # Save to file
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json -o output/result.md
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json -o output/result.md
 
 # Validate without generating
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json --validate-only
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json --validate-only
 ```
 
 ## Usage Examples
@@ -78,22 +81,22 @@ uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sa
 
 ```bash
 # Output to stdout (default)
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json
 
 # Save to file
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json -o output/result.md
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json -o output/result.md
 
 # Use YAML data instead of JSON
-uv run python src/context_generator.py -t prompt/prompt_template.md -d data.yaml
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/data.yaml
 
 # Pipe JSON from stdin
-cat prompt/sample_data.json | uv run python src/context_generator.py -t prompt/prompt_template.md
+cat data/sample_data.json | uv run python src/context_generator.py -t prompt/prompt_template.md
 
 # Use partial data (undefined variables become empty/null)
 echo '{"company_name": "TechCorp", "current_quarter": "Q3 2025"}' | uv run python src/context_generator.py -t prompt/prompt_template.md
 
 # Strict mode: error on undefined variables
-uv run python src/context_generator.py -t prompt/prompt_template.md -d data.yaml --strict
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/data.yaml --strict
 ```
 
 ### Integrating with AI Systems
@@ -102,16 +105,16 @@ The tool is AI-agnostic and works with any system via Unix pipes:
 
 ```bash
 # Copy to clipboard (macOS)
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | pbcopy
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | pbcopy
 
 # Copy to clipboard (Linux)
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | xclip -selection clipboard
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | xclip -selection clipboard
 
 # Pipe to Gemini CLI
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | gemini -p "What should I prioritize?"
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | gemini -p "What should I prioritize?"
 
 # Pipe to any AI CLI tool
-uv run python src/context_generator.py -t prompt/prompt_template.md -d prompt/sample_data.json | your-ai-tool
+uv run python src/context_generator.py -t prompt/prompt_template.md -d data/sample_data.json | your-ai-tool
 ```
 
 ### Real-World Workflows
@@ -237,7 +240,7 @@ uv run python src/context_generator.py -t template.md -d data.json --strict
 
 ## Data Structure
 
-Your JSON/YAML data should match the variables used in your template. See `prompt/sample_data.json` for a complete example that works with `prompt/prompt_template.md`.
+Your JSON/YAML data should match the variables used in your template. See `data/sample_data.json` and `data/data.yaml` for complete examples that work with `prompt/prompt_template.md`.
 
 In optional mode (default), you can provide partial data and undefined variables will be handled gracefully. In strict mode, all template variables must be present in your data.
 
