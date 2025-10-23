@@ -1,13 +1,99 @@
-# Context Generator CLI Tool
+# Context Generator: Engineering Your Prompts as Code
 
-A command-line tool for filling Jinja2 prompt templates with JSON or YAML data. This tool helps you generate rich, data-driven prompts for AI systems by combining reusable templates with structured data.
+The simple concept for **context engineering**: take your prompt template, merge it with data from any source system, and send the output to any LLM to process. You can automate this process and deploy it anywhere—as a CLI tool, in a Docker container, as a 4am workflow, or embedded inline in any process.
 
-**Philosophy**: This tool focuses on doing one thing well - generating context from templates. It's completely AI-agnostic and integrates with any AI system via standard Unix piping.
+**Why it matters**: Stop manually copying and pasting context. Template your prompt once, extract data from source systems, and systematically generate context. Version control it like code.
+
+## The Core Concept
+
+```
+Your Prompt Template  +  Data from Source System  =  Generated Prompt  -> Any LLM
+       (fixed)              (changes daily)            (ready to use)
+```
+
+That's it. This tool is an example of how you can handle the `+` (merge operation) in a more systematic way.
+
+### Example Deployment Patterns
+
+**1. Command Line** (Manual, on-demand)
+
+```
+Data File → Context Generator → Output → Copy to Clipboard → Paste into Claude/ChatGPT
+```
+
+```bash
+cat data/sample_data.json | uv run python src/context_generator.py -t prompt/prompt_template.md | pbcopy
+```
+
+**2. Scheduled Workflow** (Daily/automated)
+
+```
+Cron (4am) → Fetch Fresh Data → Context Generator → Send to Slack/Email
+```
+
+**3. Docker Container** (Deployable anywhere)
+
+```
+CI/CD Trigger → Docker Container (Context Generator) → Store Output / Trigger Action
+```
+
+**4. Embedded in Pipeline** (Inline with other processes)
+
+```
+Log File → Parse → Context Generator → Create Issue / Trigger Workflow
+```
+
+All four patterns use the same core operation: **Template + Data → Generated Prompt**. The deployment method depends on your workflow needs.
+
+## Why This Approach
+
+- **Simple**: One concept, many deployment options
+- **Flexible**: Works with any source system, any AI tool
+- **Version Controlled**: Your templates are text files in Git
+- **Testable**: Same template always produces predictable structure
+- **Scalable**: From manual CLI use to automated production pipelines
+
+## The Simplicity
+
+You need exactly three things:
+
+1. **A template file** (your prompt with variables)
+2. **Data** (from any source system)
+3. **A way to merge them** (This tool as an example, or your own code)
+
+Then deploy the output wherever you need it.
+
+## How to Get Started
+
+### 1. Install
+
+```bash
+cd use-cases/resource-prioritization/python
+uv sync
+```
+
+### 2. Create Your Template
+
+Replace hard-coded data in your prompt with `{{variable}}` and loops with `{% for item in items %}`. See `prompt/prompt_template.md` for a full example.
+
+### 3. Get Your Data
+
+Export from any source (JIRA, GitHub, database, API, etc.) as JSON or YAML.
+
+### 4. Generate
+
+```bash
+uv run python src/context_generator.py -t your_template.md -d your_data.json
+```
+
+### 5. Deploy
+
+Pipe to your AI tool (Claude, ChatGPT, Gemini) or automate it in your workflow.
 
 ## Project Structure
 
 ```
-use-cases/work/python/
+use-cases/resource-prioritization/python/
 ├── README.md              # This file
 ├── pyproject.toml         # UV project configuration
 ├── uv.lock                # UV lock file
@@ -49,7 +135,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ```bash
 # Navigate to the project directory
-cd use-cases/work/python
+cd use-cases/resource-prioritization/python
 
 # Install dependencies using uv (creates isolated environment)
 uv sync
@@ -153,15 +239,15 @@ cat data/project_status.json \
 
 ## Features
 
-- ✅ **Flexible Input**: Supports JSON and YAML data formats
-- ✅ **Stdin Support**: Can read data from pipes or stdin
-- ✅ **Optional Variables**: Undefined variables default to empty/null (use `--strict` for errors)
-- ✅ **Error Handling**: Clear error messages for template and data issues
-- ✅ **Full Validation**: `--validate-only` renders template to catch issues before generation
-- ✅ **Jinja2 Features**: Full support for Jinja2 templating including loops, conditionals, and filters
-- ✅ **AI-Agnostic**: Works with any AI system via standard Unix pipes
-- ✅ **Clean Structure**: Organized project layout with separation of concerns
-- ✅ **Zero Dependencies on AI Tools**: Core tool has no external AI integrations
+- ✅ **Simple & Focused**: Does one thing well - renders templates with data (Unix philosophy)
+- ✅ **Full Jinja2 Support**: Variables, loops, conditionals, filters, inheritance
+- ✅ **Flexible Input**: JSON or YAML data, or pipe from stdin
+- ✅ **Optional Variables**: Undefined variables default gracefully (use `--strict` for validation)
+- ✅ **AI-Agnostic**: No vendor lock-in. Works with Claude, ChatGPT, Gemini, Anthropic API, custom models
+- ✅ **Pipeline-Friendly**: Designed for Unix pipes - integrate with bash scripts, cron jobs, cloud functions
+- ✅ **Version Controllable**: Templates are text files. Store in Git. Track changes. Review diffs.
+- ✅ **Validation**: Use `--validate-only` to catch template/data issues before deployment
+- ✅ **Zero External Dependencies on AI**: Core tool has no AI integrations - you choose the LLM
 
 ## Template Syntax
 
@@ -311,60 +397,30 @@ Run the demo to see examples in action:
 
 ## Use Case: Context Engineering
 
-This tool is designed for **context engineering** - the practice of crafting effective prompts for AI systems. It's particularly useful for:
+This tool shows **one basic approach** to context engineering:
 
-### Who Should Use This
+1. Identify a prompt you want to repeatedly generate
+2. Extract the parts that change (data from Jira, GitHub, databases, etc.)
+3. Template the rest (your prompt structure)
+4. Merge them together (this tool)
+5. Deploy in whatever way fits your workflow
 
-- **Engineering Managers**: Generate weekly priority analysis from project data
-- **Product Teams**: Create structured context from user research and metrics
-- **Development Teams**: Combine code metrics, sprint data, and technical context for AI analysis
-- **AI Workflows**: Any scenario where you need to repeatedly generate similar prompts with different data
+The deployment can be:
 
-### Benefits
+- A manual CLI command when you need it
+- A cron job running at 4am
+- A Docker container in your pipeline
+- Embedded in an existing process
+- Any other way you can execute a command
 
-By separating your prompt template from your data, you can:
+All approaches use the same basic principle: **Template + Data = Output**. Version controlled.
 
-- ✅ **Reuse** prompt structures across different contexts
-- ✅ **Version control** your prompt templates
-- ✅ **Generate consistent**, well-structured prompts
-- ✅ **Easily update** prompts without modifying data pipelines
-- ✅ **Work with any AI** - Claude, ChatGPT, Gemini, or custom models
-- ✅ **Automate** prompt generation in your workflows
+## Who Uses This
 
-### Example Use Cases
-
-1. **Weekly Team Reviews**
-
-   - Template: Team structure, current sprint, blockers
-   - Data: Pull from JIRA, GitHub, etc.
-   - Question: "What should I prioritize this week?"
-
-2. **Risk Assessment**
-
-   - Template: Project status, deadlines, resource allocation
-   - Data: Project management tools
-   - Question: "What are the biggest risks?"
-
-3. **Technical Decisions**
-
-   - Template: System architecture, constraints, requirements
-   - Data: Architecture diagrams, performance metrics
-   - Question: "What approach should we take?"
-
-4. **User Research Analysis**
-   - Template: User feedback, metrics, goals
-   - Data: Analytics, surveys, interviews
-   - Question: "What features should we build next?"
-
-## Philosophy: Unix Way
-
-This tool follows the Unix philosophy:
-
-- **Do one thing well**: Generate context from templates
-- **Work together**: Pipe to any AI tool or system
-- **Text streams**: Universal interface via stdin/stdout
-
-We intentionally avoid baking in specific AI integrations. Instead, we provide a solid foundation that works with any tool you choose.
+- **Anyone with repetitive prompt patterns**: Running the same analysis, same question, different data
+- **Teams automating decision-making**: Weekly reviews, risk assessments, incident analysis
+- **Data pipelines**: Where the output is a structured prompt for AI analysis
+- **Workflows**: Anywhere you'd normally copy/paste context into a chat tool
 
 ## License
 
